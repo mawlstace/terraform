@@ -20,4 +20,13 @@ sg_ingress_rules = {
     cidr_blocks = ["0.0.0.0/0"]
     description = "https"
   }
+  "ping" = { 
+    from_port = -1
+    to_port = -1
+    protocol = "icmp"
+    cidr_blocks = ["0.0.0.0/0"]
+    description = "ping"
+  }
 }
+
+availability_zone = "us-east-1a" 

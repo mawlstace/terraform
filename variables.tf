@@ -17,4 +17,7 @@ variable "sg_ingress_rules" {
   type        = map
 }
 
-
+variable "availability_zone" {
+  
+  type = string 
+}
