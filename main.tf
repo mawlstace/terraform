@@ -8,7 +8,7 @@ resource "aws_vpc" "main_vpc" {
 resource "aws_subnet" "public" {
   vpc_id     = aws_vpc.main_vpc.id
   cidr_block = var.subnet-public   
-  availability_zone = "us-east-1a"                                                               
+  availability_zone = var.availability_zone                                                            
 }
 ### subnet association ### 
 resource "aws_route_table_association" "public" {
@@ -63,7 +63,7 @@ resource "aws_internet_gateway" "gw" {
 resource "aws_security_group" "main_security_group" {
   name = "allow_tls"
   description = "main security group "
-  vpc_id = aws_vpc.main_vpc.id
+  vpc_id = aws_vpc.main_vpc.id   # this important to set  to solve this problem (Error launching source instance: InvalidParameter: Security group and subnet belong to different networks.)
 
   dynamic "ingress" {
     for_each = var.sg_ingress_rules
@@ -84,7 +84,7 @@ resource "aws_security_group" "main_security_group" {
   }
 
   tags = {
-    Name = "main security group"
+    Name = "main egress security group"
   }
 }
 
@@ -111,7 +111,7 @@ resource "aws_instance" "ec2" {
 }
 
 resource "aws_ebs_volume" "ebs_volume" {
-  availability_zone = "us-east-1a"
+  availability_zone = var.availability_zone
   size              = 1
 }
 resource "aws_volume_attachment" "ebs_attachment" {
@@ -139,6 +139,9 @@ output "nat_gateway_ip" {
   value = aws_eip.nat_gateway.public_ip
 }
 
+output "ec2-ip" {
+  value = aws_eip.myeip.public_ip
+}
 
 
 # root_block_device {
