@@ -97,7 +97,7 @@ resource "aws_instance" "ec2" {
   
   instance_type = "t2.micro"
   ami = "ami-0ee02acd56a52998e"
-  vpc_security_group_ids= ["${aws_security_group.main_security_group.id}"]
+  vpc_security_group_ids= [aws_security_group.main_security_group.id]
   subnet_id=aws_subnet.public.id
   
   key_name="my_key"
