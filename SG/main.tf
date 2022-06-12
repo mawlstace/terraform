@@ -16,5 +16,5 @@ dynamic "ingress" {
 
 
 output "sg_name" {
-  value = aws_security_group.main.name
+  value = aws_security_group.main.name   # i am defending this variable so  i can use it in web instance using the modules 
 }

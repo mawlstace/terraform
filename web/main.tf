@@ -18,12 +18,12 @@ resource "aws_instance" "web" {
 
 
 module "SG" {
-  source = "../SG"
+  source = "../SG"   # i am defening module of securitygroup so i can use output of sg_name which is aws_security_group.main.id 
 }
 
 module "elastic-ip" {
   source = "../elastic"
-  instance_id = aws_instance.web.id
+  instance_id = aws_instance.web.id   # i am ppassing a variable from  resource aws_instance.web to elastic-ip modules 
 }
 
 output "elastic_ip-1" {
