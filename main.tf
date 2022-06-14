@@ -38,6 +38,12 @@ output "username_value" {
 }
 ## this will random a string for username just for fun ! ## 
 
+## local_file ## 
+## i will use local_file to store the results in files ## 
+## i could use this to send username and password to dev/testing team ## 
+## hint this not for production use ## 
+
+
 resource "local_file" "password_value" {
     content  = random_password.password.result
     filename = "/home/admin1/Desktop/terraform1/Iam/password.txt"
