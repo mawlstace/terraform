@@ -14,7 +14,7 @@ resource "random_string" "username" {
   override_special = false
   
 }
-resource "aws_db_instance" "primary-rds" {
+ resource "aws_db_instance" "primary-rds" {
   allocated_storage    = 10
   engine               = "mysql"
   engine_version       = "5.7"
@@ -37,3 +37,14 @@ output "username_value" {
   value = random_string.username.result
 }
 ## this will random a string for username just for fun ! ## 
+
+resource "local_file" "password_value" {
+    content  = random_password.password.result
+    filename = "/home/admin1/Desktop/terraform1/Iam/password.txt"
+}
+
+resource "local_file" "username_value" {
+    content  = random_string.username.result 
+    filename = "/home/admin1/Desktop/terraform1/Iam/user.txt"
+}
+
